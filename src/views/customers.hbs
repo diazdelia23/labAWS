@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Películas</title>
+        <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
+    </head>
+    <body>    
+        <nav class = "navbar navbar-dark bg-dark"> 
+            <a href="/" class="navbar-brand"> PELICULAS</a>
+        </nav>
+
+
+        <div class="container mt-5 col-md-12">
+            <div class="row mt-5">
+                <div class="col-md-10">
+                    <h2>Lista de Peliculas</h2>
+                   <table class="table table-bordered table-hover">
+                       <thread>
+                           <tr>
+                               <th>no.</th>
+                               <th>Nombre</th>
+                               <th>Descripcion</th>
+                               <th>Año</th>
+                               <th>Categoria</th>
+                           </tr>
+                       </thread>
+                       <tbody>
+                            {{#each results}}
+                            <tr>
+                                <td>{{ id_película }}</td>  
+                              <td>{{ nombre }}</td>
+                              <td>{{ descripcion}}</td>
+                              <td>{{ año }}</td>
+                              <td>{{ categoria }}</td>
+                              <td>
+                                <a href="/update/{{id_película}}" class="btn btn-sm btn-info edit">Editar</a>
+                                <a href="/delete/{{id_película}}" class="btn btn-sm btn-danger delete">Eliminar</a>
+                              </td>
+                            </tr>
+                            {{/each}}
+                       </tbody>
+                   </table>
+                    
+                </div>
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="/add" method="post">
+                                <div class="form-group">
+                                    <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="descripcion" placeholder="Descripcion" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="año" placeholder="Año" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="categoria" placeholder="Categoria" class="form-control">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    Guardar Pelicula                                
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html> 
