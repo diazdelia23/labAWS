@@ -9,12 +9,18 @@ labAWS
 
 4. Para poder crear mi Autoscaling Group, creé una imagen de la instancia en donde ejecuto mi app.
 
-5. Ya con la imagen, puedo crear mi Autoscaling Group en el cual determino las reglas que deseo para que puedan aumentar o reducirse mis instancias las cuales quiero que sean con la imagen de a primera instancia que creé.
+5. Luego, creo mi Launch Configuration en el que agrego los comandos con los que va a iniciar la instancia y la app al encenderse cuando se agreguen más instancias a través del autoscaling. Con ello va a poder repartirse a través del Load Balancer. Los comandos son los siguientes:
 
-6. Después creé el Load Balancer, establezco los puertos y demás configuración.
+#!/bin/bash
+cd /home/ec2-user/labAWS/src
+/home/ec2-user/.nvm/versions/node/v10.16.0/bin/node app.js
 
-7. En mi Autoscaling asigno qué Load Balancer voy a utilizar, el cuál es el que creé anteriormente. Ahí ya puedo ver las instancias que mi autoscaling va a crear y confirmar si están en servicio o no.
+6. Ya con la imagen, puedo crear mi Autoscaling Group en el cual determino las reglas que deseo para que puedan aumentar o reducirse mis instancias las cuales quiero que sean con la imagen de a primera instancia que creé.
 
-8. Para probar mi Load Balancer lo realicé mendiante el DNS el cual me direccionaba a alguna de mis IP de las instancias creadas y en servicio.
+7. Después creé el Load Balancer, establezco los puertos y demás configuración.
 
-9. Luego, para la prueba de carga, realicé stress en una de mis instancias a manera que se activaran las políticas de mi autoscaling y me generó 2 máquinas virtuales. Al finalizar la prueba y bajar el rendimiento de mi instancia, fueron terminadas debido a la política que había configurado.
+8. En mi Autoscaling asigno qué Load Balancer voy a utilizar, el cuál es el que creé anteriormente. Ahí ya puedo ver las instancias que mi autoscaling va a crear y confirmar si están en servicio o no.
+
+9. Para probar mi Load Balancer lo realicé mendiante el DNS el cual me direccionaba a alguna de mis IP de las instancias creadas y en servicio.
+
+10. Luego, para la prueba de carga, realicé stress en una de mis instancias a manera que se activaran las políticas de mi autoscaling y me generó 2 máquinas virtuales. Al finalizar la prueba y bajar el rendimiento de mi instancia, fueron terminadas debido a la política que había configurado.
