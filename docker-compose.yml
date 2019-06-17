@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'base'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'Hola123*'
+      MYSQL_ROOT_PASSWORD: 'Hola123*'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+    volumes:
+      - crud:/var/lib/mysql
+      - ./db-init:/docker-entrypoint-initbd.d
+    
+  nodejs:
+   image: deliamau/node-web-app:latest
+   ports:
+      - '3307:3306'
+      - '3000:3000'
+   expose:
+      - '3000'
+   depends_on:
+     - db
+   networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+# Names our volume
+volumes:
+  crud:
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
